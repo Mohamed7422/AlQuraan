@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+       <variable
+           name="surah"
+           type="com.example.alquran.data.remote.dto.SurahData" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="8dp"
+
+     app:cardUseCompatPadding="true"
+
+
+    >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4sp"
+            android:background="#E8E0D2"
+            >
+     <LinearLayout
+         android:id="@+id/sura_bgNumber"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="4sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         >
+     <TextView
+         android:id="@+id/number"
+         android:layout_width="60dp"
+         android:layout_height="60dp"
+         android:text="@{String.valueOf(surah.number)}"
+         android:gravity="center"
+         android:background="@drawable/ic_surah_bg"
+         android:backgroundTint="@color/gold"
+         android:backgroundTintMode="src_atop"
+
+         android:textColor="@color/black"
+         android:textStyle="bold"
+         tools:text="1"
+         />
+     </LinearLayout>
+
+     <TextView
+         android:id="@+id/englishName"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintStart_toEndOf="@id/sura_bgNumber"
+         app:layout_constraintTop_toTopOf="parent"
+         android:layout_marginTop="8dp"
+         android:layout_marginStart="8dp"
+         android:text="@{surah.englishName}"
+         android:paddingStart="4sp"
+         tools:text="asfgasdfg"
+         android:textStyle="bold"
+         android:textColor="@color/black"
+
+          />
+     <TextView
+         android:id="@+id/ayatCounter"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintStart_toEndOf="@id/sura_bgNumber"
+         app:layout_constraintTop_toBottomOf="@id/englishName"
+         android:layout_marginTop="8dp"
+         android:layout_marginStart="8dp"
+         android:text="@{String.valueOf(surah.numberOfAyahs)}"
+         android:paddingStart="4sp"
+         tools:text="56"
+         android:textStyle="bold"
+         android:textColor="@color/black"
+         />
+     <TextView
+         android:id="@+id/arabicName"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         android:layout_marginTop="8dp"
+         android:layout_marginEnd="8dp"
+         android:text="@{surah.name}"
+         android:textStyle="bold"
+         tools:text="سيلبسيلسي"
+         android:textColor="@color/black"
+
+         />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+
+</layout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+    <item name="android:background"> @drawable/search_view_bg</item>
+    </style>
+
+</resources>

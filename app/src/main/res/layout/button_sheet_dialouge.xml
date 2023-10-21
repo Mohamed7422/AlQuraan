@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_sheet_bg"
+    android:id="@+id/sheet_container"
+
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_translation"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <RadioGroup
+        android:id="@+id/selection_container"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
+        <RadioButton
+            android:id="@+id/eng_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+             android:checked="true"
+             android:text="@string/english_Translation"
+            android:buttonTint="@color/white"
+
+            />
+        <RadioButton
+            android:id="@+id/fr_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/french_translation"
+            android:buttonTint="@color/white"
+
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/Progress_Bar_Color"
+        android:textSize="18sp"
+        android:background="@drawable/save_btn_bg"
+        android:layout_marginBottom="8dp"
+
+        />
+
+</LinearLayout>
