@@ -12,7 +12,7 @@ import com.example.alquran.databinding.SurahItemBinding
 import com.example.alquran.domain.model.SurahModel
 
 
-class SurahAdapter(private val listener:OnSurahClickListener) :
+class SurahAdapter(private val listener:(SurahData) -> Unit) :
     ListAdapter<SurahData, SurahAdapter.SurahPropertyViewHolder>(DiffCallback){
 
     companion object DiffCallback : DiffUtil.ItemCallback<SurahData>() {
@@ -57,7 +57,7 @@ class SurahAdapter(private val listener:OnSurahClickListener) :
                  if(position!=RecyclerView.NO_POSITION){
                     val item =  getItem(position)
                      if (item != null) {
-                         listener.onSurahClick(item)
+                         listener.invoke(item) //or listener(item)
                      }
                  }
              }
@@ -66,6 +66,6 @@ class SurahAdapter(private val listener:OnSurahClickListener) :
 
 
     interface OnSurahClickListener {
-        fun onSurahClick(surah: SurahData)
+        fun onSurahClick(surah: SurahData) // (SurahData) -> Unit
     }
 }

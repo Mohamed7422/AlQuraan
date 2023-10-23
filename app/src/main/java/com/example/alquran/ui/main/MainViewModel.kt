@@ -38,7 +38,6 @@ class MainViewModel @Inject constructor (
     fun onSurahItemClick(surahData: SurahData){
         _navigateToSelectedProperty.value = surahData
 
-
     }
 
     fun onNavigateToSelectedPropertyCompleted(){

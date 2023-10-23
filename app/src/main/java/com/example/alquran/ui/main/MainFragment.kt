@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main)
-        , SurahAdapter.OnSurahClickListener
+//        , SurahAdapter.OnSurahClickListener
     {
         private val viewModel : MainViewModel by viewModels()
         @RequiresApi(Build.VERSION_CODES.O)
@@ -27,7 +27,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main)
             super.onStart()
             binding.lifecycleOwner = viewLifecycleOwner
             binding.viewModel = viewModel
-            val adapter = SurahAdapter(this)
+            val adapter = SurahAdapter {
+
+                viewModel.onSurahItemClick(it)
+
+            }
             binding.surahRecyclerView.adapter = adapter
 
             viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner){
@@ -43,10 +47,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main)
 
          }
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        override fun onSurahClick(surah: SurahData) {
-            //update the state observer on the view model
-                viewModel.onSurahItemClick(surah)
-
-        }
+//        @RequiresApi(Build.VERSION_CODES.O)
+//        override fun onSurahClick(surah: SurahData) {
+//            //update the state observer on the view model
+//                viewModel.onSurahItemClick(surah)
+//
+//        }
     }
