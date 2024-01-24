@@ -7,28 +7,29 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.alquran.ui.main.MainFragment"
-        android:label="Home"
+        android:label="List of Surahs"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_surahDetails"
             app:destination="@id/surahDetails"
 
 
-
-              />
+            />
     </fragment>
 
     <fragment
 
         android:id="@+id/surahDetails"
         android:name="com.example.alquran.ui.surahDetail.SurahDetailsFragment"
-        android:label="Details"
-        tools:layout="@layout/fragment_surah_details"
-        >
+        android:label="Sura Ayat"
+        tools:layout="@layout/fragment_surah_details">
 
         <argument
             android:name="suraItem"
             app:argType="com.example.alquran.data.remote.dto.SurahData" />
+        <action
+            android:id="@+id/action_surahDetails_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 </navigation>

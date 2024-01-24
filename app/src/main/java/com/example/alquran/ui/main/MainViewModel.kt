@@ -2,10 +2,14 @@ package com.example.alquran.ui.main
 
 
 import androidx.lifecycle.*
+import com.example.alquran.Resources
 import com.example.alquran.data.remote.dto.SurahData
+import com.example.alquran.data.remote.dto.SurahDto
 import com.example.alquran.domain.model.SurahModel
 import com.example.alquran.domain.use_case.get_surahList.GetSurahUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,34 +18,36 @@ class MainViewModel @Inject constructor (
       private val getSurahUseCase: GetSurahUseCase
 ): ViewModel() {
 
-     private val _navigateToSelectedProperty = MutableLiveData<SurahData?>()
-     val navigateToSelectedProperty: LiveData<SurahData?>
-         get()=_navigateToSelectedProperty
+     private val _navigateToSelectedProperty = MutableLiveData<Resources<SurahDto>>()
+     val navigateToSelectedProperty: LiveData<Resources<SurahDto>> = _navigateToSelectedProperty
 
 
+    private val _selectedItem = MutableLiveData<SurahData>()
+    val selectedItem :LiveData<SurahData> = _selectedItem
     init {
         getSurah()
+
     }
+
 
     private fun getSurah() {
         viewModelScope.launch {
-            //make the request
-             getSurahUseCase.getSurahList()
-            //getting data from source and add it to the observer
+            getSurahUseCase().collect{
+                    result ->
+                _navigateToSelectedProperty.value = result
             }
         }
-    val listData :LiveData<SurahModel> = getSurahUseCase.getSurahListLiveData()
+    }
 
-
-
+//    val listData :LiveData<SurahModel> = getSurahUseCase.getSurahListLiveData()
 
     fun onSurahItemClick(surahData: SurahData){
-        _navigateToSelectedProperty.value = surahData
+        _selectedItem.value = surahData
 
     }
 
     fun onNavigateToSelectedPropertyCompleted(){
-        _navigateToSelectedProperty.value = null
+        _selectedItem.value = null
     }
 
 

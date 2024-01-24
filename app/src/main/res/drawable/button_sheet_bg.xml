@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/Progress_Bar_Color"> </solid>
+    <solid android:color="@color/beige"> </solid>
 
     <corners android:topLeftRadius="32dp"
            android:topRightRadius="32dp" />

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
     <variable
@@ -20,19 +17,50 @@
         android:padding="8dp"
         >
 
+
+
+
+        <ProgressBar
+            android:id="@+id/surasProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:setVisibleLoading = "@{viewModel.navigateToSelectedProperty}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/surahRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:listData="@{viewModel.listData}"
+            app:setVisibleListSuccess="@{viewModel.navigateToSelectedProperty}"
             tools:listitem="@layout/surah_item"
 
             />
+
+        <TextView
+            android:id="@+id/surasErrorMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:setVisibleError = "@{viewModel.navigateToSelectedProperty}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

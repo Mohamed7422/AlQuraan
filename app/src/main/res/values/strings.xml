@@ -7,4 +7,6 @@
     <string name="english_Translation">English</string>
     <string name="french_translation">French</string>
     <string name="save">save</string>
+    <string name="LanguageSharedPref">LanguageSharedPref</string>
+    <string name="languagekey">LanguageKey</string>
 </resources>

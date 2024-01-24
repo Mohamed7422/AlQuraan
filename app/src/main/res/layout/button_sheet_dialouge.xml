@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/button_sheet_bg"
     android:id="@+id/sheet_container"
-
-
     >
 
     <TextView
@@ -32,7 +30,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-             android:checked="true"
+
              android:text="@string/english_Translation"
             android:buttonTint="@color/white"
 

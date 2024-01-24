@@ -12,12 +12,18 @@ import com.example.alquran.databinding.SurahItemBinding
 import com.example.alquran.domain.model.SurahModel
 
 
-class SurahAdapter(private val listener:(SurahData) -> Unit) :
-    ListAdapter<SurahData, SurahAdapter.SurahPropertyViewHolder>(DiffCallback){
+class SurahAdapter(private val listener: (SurahData) -> Unit) :
+    ListAdapter<SurahData, SurahAdapter.SurahPropertyViewHolder>(DiffCallback) {
+
+
+    init {
+        setHasStableIds(true)
+    }
 
     companion object DiffCallback : DiffUtil.ItemCallback<SurahData>() {
-     override fun areItemsTheSame(oldItem: SurahData, newItem: SurahData): Boolean {
-            return oldItem === newItem
+
+        override fun areItemsTheSame(oldItem: SurahData, newItem: SurahData): Boolean {
+            return oldItem === newItem //using referential equality
         }
 
         override fun areContentsTheSame(oldItem: SurahData, newItem: SurahData): Boolean {
@@ -27,13 +33,13 @@ class SurahAdapter(private val listener:(SurahData) -> Unit) :
 
 
     override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int): SurahPropertyViewHolder {
-           return SurahPropertyViewHolder(
-               SurahItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-           )
+        parent: ViewGroup, viewType: Int
+    ): SurahPropertyViewHolder {
+        return SurahPropertyViewHolder(
+            SurahItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
     }
-
 
 
     override fun onBindViewHolder(holder: SurahPropertyViewHolder, position: Int) {
@@ -42,30 +48,28 @@ class SurahAdapter(private val listener:(SurahData) -> Unit) :
     }
 
 
+    inner class SurahPropertyViewHolder(private var binding: SurahItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(surah: SurahData) {
+            binding.surah = surah
+            binding.executePendingBindings()
+        }
 
-     inner class SurahPropertyViewHolder(private var binding: SurahItemBinding)
-         :RecyclerView.ViewHolder(binding.root)
-     {
-         fun bind(surah: SurahData){
-              binding.surah= surah
-             binding.executePendingBindings()
-         }
-
-         init {
-             binding.root.setOnClickListener{
-                 val position  = bindingAdapterPosition
-                 if(position!=RecyclerView.NO_POSITION){
-                    val item =  getItem(position)
-                     if (item != null) {
-                         listener.invoke(item) //or listener(item)
-                     }
-                 }
-             }
-         }
-     }
-
-
-    interface OnSurahClickListener {
-        fun onSurahClick(surah: SurahData) // (SurahData) -> Unit
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.invoke(item)
+                    }
+                }
+            }
+        }
     }
+
+
+//    interface OnSurahClickListener {
+//        fun onSurahClick(surah: SurahData) // (SurahData) -> Unit
+//    }
 }

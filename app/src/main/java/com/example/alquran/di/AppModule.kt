@@ -2,7 +2,7 @@ package com.example.alquran.di
 
 import com.example.alquran.common.Constants
 import com.example.alquran.data.remote.QuranAPI
-import com.example.alquran.data.remote.QuranTranslationAPI
+
 import com.example.alquran.data.repo.SurahListTranslationRepoImpl
 import com.example.alquran.data.repo.SurahRepoImplementation
 import com.example.alquran.domain.repo.SurahListRepo
@@ -30,6 +30,7 @@ object AppModule {
 
     @Provides
     @Singleton
+    @SurasList
    fun provideSurahApi():QuranAPI{
        return Retrofit.Builder()
            .baseUrl(Constants.BASE_URL)
@@ -40,17 +41,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSurahTranslationApi():QuranTranslationAPI{
+    @SurahDetails
+    fun provideSurahTranslationApi():QuranAPI{
          return Retrofit.Builder()
              .baseUrl(Constants.SURA_TRANS_BASE_URL)
              .addConverterFactory(GsonConverterFactory.create())
              .build()
-             .create(QuranTranslationAPI::class.java)
+             .create(QuranAPI::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesSurahRepository(api: QuranAPI):SurahListRepo{
+    fun providesSurahRepository(@SurasList api: QuranAPI):SurahListRepo{
         return SurahRepoImplementation(api)
     }
 
@@ -69,7 +71,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesSurahListTranslationRepository(api: QuranTranslationAPI):SurahListTranslationRepo{
+    fun providesSurahListTranslationRepository(@SurahDetails api: QuranAPI):SurahListTranslationRepo{
         return SurahListTranslationRepoImpl(api)
     }
 
