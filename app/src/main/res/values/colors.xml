@@ -10,5 +10,6 @@
     <color name="gold">#EEBD2C</color>
     <color name="beige">#99735C</color>
     <color name="transperent">#039D8E61</color>
+    <color name="beige1">#E0D8C8</color>
     <color name="Progress_Bar_Color">#363532</color>
 </resources>

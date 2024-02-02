@@ -16,9 +16,6 @@ class SurahAdapter(private val listener: (SurahData) -> Unit) :
     ListAdapter<SurahData, SurahAdapter.SurahPropertyViewHolder>(DiffCallback) {
 
 
-    init {
-        setHasStableIds(true)
-    }
 
     companion object DiffCallback : DiffUtil.ItemCallback<SurahData>() {
 

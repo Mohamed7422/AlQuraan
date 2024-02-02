@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">القرأن</string>
+    <string name="search">البحث</string>
+    <string name="select_translation">حدد الترجمه</string>
+    <string name="save">حفظ</string>
+    <string name="select_qari">اختار القارئ المفضل</string>
+    <string name="muhammad_sideq_al_minshawe_muratl">محمد صديق المنشاوي مرتل</string>
+    <string name="faris_abbad">فارس عباد مرتل</string>
+    <string name="surah_ayat">أيات السوره</string>
+</resources>

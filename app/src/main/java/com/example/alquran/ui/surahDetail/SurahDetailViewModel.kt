@@ -1,6 +1,7 @@
 package com.example.alquran.ui.surahDetail
 
 
+import android.telephony.SignalStrength
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.alquran.Resources
@@ -35,6 +36,9 @@ class SurahDetailViewModel @Inject constructor(
     val suraDetailsList : StateFlow<SuraDetailsState> = _suraDetailsList
 
 
+
+    private val _surahQariSelected = MutableLiveData<String>()
+      val surahQariSelected :LiveData<String> = _surahQariSelected
     init {
         searchQuery.observeForever{query->
             filterList(query)
@@ -43,6 +47,8 @@ class SurahDetailViewModel @Inject constructor(
     }
     private var language   = ""
     private var surahItemNumber: Int = 0
+    private var surahItemNumberForPlayer: Int = 0
+    private var surahQariSelection :String = ""
 
     fun getSurahDetail(language: String, surahId: Int) {
 
@@ -52,10 +58,10 @@ class SurahDetailViewModel @Inject constructor(
 
                 is Resources.Success -> {
                     originalList.value =  result.data
-
+                    _suraDetailsList.value = SuraDetailsState(surahDetailsList= result.data)
                         println("FromVieuModel search: ${searchQuery.value}")
 
-                        _suraDetailsList.value = SuraDetailsState(surahDetailsList = result.data)
+//                        _suraDetailsList.value = SuraDetailsState(surahDetailsList = result.data)
 
                         filterList(searchQuery.value)
                 }
@@ -131,6 +137,28 @@ class SurahDetailViewModel @Inject constructor(
 
     }
 
+    fun addSurahNumForPlayer(surahNum: Int){
+        surahItemNumberForPlayer = surahNum
+    }
+    fun prepareSuraNumberForPlayer() = run {
+        var surahNumString:String?=""
+        surahNumString = if (surahItemNumberForPlayer<10){
+            "00$surahItemNumberForPlayer"
+        }else if (surahItemNumberForPlayer<100){
+            "0$surahItemNumberForPlayer"
+        }else{
+            "$surahItemNumberForPlayer"
+        }
+        surahNumString
+    }
+
+    fun addQariSelection(qari: String) {
+        _surahQariSelected.value  = qari
+    }
+
+    fun getQariSelection():String{
+        return  surahQariSelection
+    }
 
 
     /*

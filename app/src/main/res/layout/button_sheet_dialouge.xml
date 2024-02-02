@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/button_sheet_bg"
+
     android:id="@+id/sheet_container"
     >
 
@@ -14,7 +15,7 @@
         android:padding="16dp"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         />
 
     <RadioGroup
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-
+            android:textColor="@color/white"
              android:text="@string/english_Translation"
             android:buttonTint="@color/white"
 
@@ -43,10 +44,52 @@
             android:textSize="18sp"
             android:text="@string/french_translation"
             android:buttonTint="@color/white"
-
+            android:textColor="@color/white"
             />
 
     </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_qari"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        />
+
+    <RadioGroup
+        android:id="@+id/selection_qari_container"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+
+        >
+        <RadioButton
+            android:id="@+id/menshawi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/muhammad_sideq_al_minshawe_muratl"
+            android:buttonTint="@color/white"
+
+            />
+        <RadioButton
+            android:id="@+id/faris"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/faris_abbad"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            />
+
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/save"

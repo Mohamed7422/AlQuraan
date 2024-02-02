@@ -7,7 +7,7 @@ package com.example.alquran.domain.repo
 
 interface SurahListTranslationRepo {
 
-        @GET("sura/{language}/{id}")
+
         suspend fun getSurahListTranslation(
             language:String,
             surahId: Int)
