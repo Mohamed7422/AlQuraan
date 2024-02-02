@@ -4,9 +4,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
     <string name="select_translation">Select Translation</string>
-    <string name="english_Translation">English</string>
-    <string name="french_translation">French</string>
+    <string name="english_Translation" translatable="false">English</string>
+    <string name="french_translation" translatable="false">French</string>
     <string name="save">save</string>
     <string name="LanguageSharedPref">LanguageSharedPref</string>
     <string name="languagekey">LanguageKey</string>
+    <string name="select_qari">Select Qari</string>
+    <string name="muhammad_sideq_al_minshawe_muratl">Muhammad Sideq Al Minshawe muratl</string>
+    <string name="faris_abbad">Faris Abbad Muratl</string>
+    <string name="qurisharedpref">QuriSharedPref</string>
+    <string name="qarikey">QariKey</string>
+    <string name="surah_ayat">Surah Ayat</string>
 </resources>

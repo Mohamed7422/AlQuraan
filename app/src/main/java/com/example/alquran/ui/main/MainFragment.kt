@@ -26,13 +26,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main)
     {
         private val viewModel : MainViewModel by viewModels()
 
-
-
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            val supportActionBar = (activity as AppCompatActivity)?.supportActionBar
-            supportActionBar?.title = "Home"
+//            val supportActionBar = (activity as AppCompatActivity)?.supportActionBar
+//            supportActionBar?.title = "Home"
         }
         @RequiresApi(Build.VERSION_CODES.O)
         override fun onStart() {

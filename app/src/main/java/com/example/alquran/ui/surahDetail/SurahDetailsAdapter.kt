@@ -14,14 +14,12 @@ import com.example.alquran.databinding.SurahItemBinding
 class SurahDetailsAdapter :
     ListAdapter<SurahTranslationDetails, SurahDetailsAdapter.SurahPropertyViewHolder>(DiffCallback){
 
-
-
     companion object DiffCallback : DiffUtil.ItemCallback<SurahTranslationDetails>() {
      override fun areItemsTheSame(oldItem: SurahTranslationDetails, newItem: SurahTranslationDetails): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: SurahTranslationDetails, newItem: SurahTranslationDetails): Boolean {
+     override fun areContentsTheSame(oldItem: SurahTranslationDetails, newItem: SurahTranslationDetails): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -51,8 +49,6 @@ class SurahDetailsAdapter :
              binding.surahDetails = surah
              binding.executePendingBindings()
          }
-
-
 
      }
 

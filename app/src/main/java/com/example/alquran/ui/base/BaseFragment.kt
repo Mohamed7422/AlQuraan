@@ -34,7 +34,7 @@ open class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutResId 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-//        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     }
 }

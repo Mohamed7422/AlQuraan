@@ -42,12 +42,12 @@
                      android:textStyle="bold"
                      android:gravity="center_vertical"
                      tools:text="3"
-                     tools:textColor="@color/black" />
+                     android:textColor="@color/black" />
 
              </LinearLayout>
 
              <LinearLayout
-
+                 android:padding="4dp"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  android:layout_margin="4dp"
@@ -62,14 +62,13 @@
                      android:textAlignment="textEnd"
 
                      android:textIsSelectable="true"
-                      android:textSize="24sp"
+                     android:textSize="24sp"
                      android:textStyle="normal"
                      tools:text="يليبليبليب"
-                     tools:textColor="@color/black" />
+                     android:textColor="@color/black" />
                  <Space
                      android:layout_width="match_parent"
                      android:layout_height="16dp"
-
                      />
 
 
@@ -82,7 +81,7 @@
                      android:textSize="24sp"
                      android:textStyle="normal"
                      tools:text="sgdfdg"
-                     tools:textColor="@color/black" />
+                     android:textColor="@color/black"/>
 
              </LinearLayout>
 

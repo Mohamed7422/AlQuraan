@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="90dp"
+    app:cardBackgroundColor="@color/beige1"
+    >
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:padding="16dp"
+
+    >
+
+    <!-- Control buttons: play, pause, forward, rewind... -->
+    <ImageButton
+        android:id="@+id/exo_rew"
+        style="@style/ExoMediaButton.Rewind"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <ImageButton
+        android:id="@+id/exo_prev"
+        style="@style/ExoMediaButton.Previous"
+        android:layout_toEndOf="@id/exo_rew"/>
+
+    <ImageButton
+        android:id="@+id/exo_play"
+        style="@style/ExoMediaButton.Play"
+        android:layout_toEndOf="@id/exo_prev"/>
+
+    <ImageButton
+        android:id="@+id/exo_pause"
+        style="@style/ExoMediaButton.Pause"
+        android:layout_toEndOf="@id/exo_play"/>
+
+    <ImageButton
+        android:id="@+id/exo_next"
+        style="@style/ExoMediaButton.Next"
+        android:layout_toEndOf="@id/exo_pause"/>
+
+    <ImageButton
+        android:id="@+id/exo_ffwd"
+        style="@style/ExoMediaButton.FastForward"
+        android:layout_toEndOf="@id/exo_next"/>
+
+    <!-- SeekBar and Time Labels -->
+
+    <!-- Position label -->
+    <TextView
+        android:id="@+id/exo_position"
+        style="@style/ExoMediaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exo_rew"
+        android:layout_alignParentStart="true"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <!-- SeekBar -->
+    <com.google.android.exoplayer2.ui.DefaultTimeBar
+        android:id="@+id/exo_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/exo_position"
+        android:layout_toStartOf="@id/exo_duration"
+        android:layout_below="@id/exo_rew"
+
+        app:bar_height="2dp"
+
+        app:touch_target_height="15dp" />
+
+    <!-- Duration label -->
+    <TextView
+        android:id="@+id/exo_duration"
+        style="@style/ExoMediaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exo_ffwd"
+        android:layout_alignParentEnd="true"
+
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

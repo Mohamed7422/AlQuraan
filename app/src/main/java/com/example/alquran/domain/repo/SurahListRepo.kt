@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface SurahListRepo {
 
-        @GET("surah")
+
         suspend fun getSurahList(): SurahDto
 }
