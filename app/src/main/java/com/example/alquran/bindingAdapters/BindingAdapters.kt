@@ -3,6 +3,7 @@ package com.example.alquran.bindingAdapters
 import android.opengl.Visibility
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -34,6 +35,16 @@ fun RecyclerView.setVisibleListSuccess(resources: Resources<SurahDto>?){
                 adapter?.submitList(resources.data?.list )
         }
 
+}
+
+@BindingAdapter("setVisibleSearchEditText")
+fun setVisibleSearchEditText(view: EditText,resources: Resources<*>){
+
+    if (resources is Resources.Success ){
+        view.visibility = View.VISIBLE
+    }else{
+        view.visibility = View.GONE
+    }
 }
 
 @BindingAdapter("setVisibleError")
@@ -82,7 +93,9 @@ fun setVisibleLoadingFroSurahDetails(view: View,state: StateFlow<SuraDetailsStat
 fun setVisibleErrorForSurahDetails(view: TextView,stateFlow: StateFlow<SuraDetailsState>){
 
     view.visibility = if (!stateFlow.value.error.isNullOrBlank()) View.VISIBLE else View.GONE
-    view.text = stateFlow.value.error
+    view.text =  view.context.getString(R.string.unexpected_error_check_your_internet_connection)
+
+
 }
 
 @BindingAdapter("goneIfNotNull")

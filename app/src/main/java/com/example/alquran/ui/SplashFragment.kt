@@ -31,19 +31,15 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         splashBinding.img.apply {
             alpha = 0.5f
             scaleX = 0.5f
             scaleY =0.5f
-
         }
 
-        splashBinding.img.animate().setDuration(3000).scaleX(1.2f)
-            .scaleY(1.2f).alpha(1f).withEndAction{
+        splashBinding.img.animate().setDuration(2500).scaleX(1f)
+            .scaleY(1f).alpha(1f).withEndAction{
                 findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
-
             }.start()
 
     }

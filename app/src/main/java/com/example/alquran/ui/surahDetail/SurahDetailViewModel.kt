@@ -24,31 +24,32 @@ class SurahDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-   val searchQuery = MutableLiveData<String>()
+    val searchQuery = MutableLiveData<String>()
 
 
-     private val originalList = MutableLiveData<SurahTranslationDTO?>()
+    private val originalList = MutableLiveData<SurahTranslationDTO?>()
 
     // ************************************************************* //
 
     private val _suraDetailsList = MutableStateFlow(SuraDetailsState())
 
-    val suraDetailsList : StateFlow<SuraDetailsState> = _suraDetailsList
-
+    val suraDetailsList: StateFlow<SuraDetailsState> = _suraDetailsList
 
 
     private val _surahQariSelected = MutableLiveData<String>()
-      val surahQariSelected :LiveData<String> = _surahQariSelected
+    val surahQariSelected: LiveData<String> = _surahQariSelected
+
     init {
-        searchQuery.observeForever{query->
+        searchQuery.observeForever { query ->
             filterList(query)
 
         }
     }
-    private var language   = ""
+
+    private var language = ""
     private var surahItemNumber: Int = 0
     private var surahItemNumberForPlayer: Int = 0
-    private var surahQariSelection :String = ""
+    private var surahQariSelection: String = ""
 
     fun getSurahDetail(language: String, surahId: Int) {
 
@@ -57,33 +58,32 @@ class SurahDetailViewModel @Inject constructor(
             when (result) {
 
                 is Resources.Success -> {
-                    originalList.value =  result.data
-                    _suraDetailsList.value = SuraDetailsState(surahDetailsList= result.data)
-                        println("FromVieuModel search: ${searchQuery.value}")
+                    originalList.value = result.data
+                    _suraDetailsList.value = SuraDetailsState(surahDetailsList = result.data)
+                    println("FromVieuModel search: ${searchQuery.value}")
 
 //                        _suraDetailsList.value = SuraDetailsState(surahDetailsList = result.data)
 
-                        filterList(searchQuery.value)
+                    filterList(searchQuery.value)
                 }
 
                 is Resources.Error -> {
                     _suraDetailsList.value =
                         SuraDetailsState(error = result.message ?: "Un expected error")
-                    Log.i("VieuModelTag", "result data : ${result.message?:"Null"}")
+                    Log.i("VieuModelTag", "result data : ${result.message ?: "Null"}")
 
                 }
 
 
                 is Resources.Loading -> {
                     _suraDetailsList.value = SuraDetailsState(loading = true)
-                    Log.i("VieuModelTag", "result data : ${result.message?:"Null"}")
+                    Log.i("VieuModelTag", "result data : ${result.message ?: "Null"}")
 
                 }
 
             }
 
         }.launchIn(viewModelScope)
-
 
 
 //            getSurahDetailUseCase.getSurahListTranslation(language,surahId)
@@ -94,27 +94,26 @@ class SurahDetailViewModel @Inject constructor(
 //            }
 
 
-
     }
 
-    private fun filterList (search:String?){
+    private fun filterList(search: String?) {
         val allList = originalList.value?.result
 
         val filteredItems =
-            if ( search.isNullOrBlank()){
+            if (search.isNullOrBlank()) {
                 allList
 
-        }else{
-            allList?.filter { it.aya.equals(search,ignoreCase = true) }
+            } else {
+                allList?.filter { it.aya.equals(search, ignoreCase = true) }
 
-        }
+            }
 
         _suraDetailsList.value = SuraDetailsState(surahDetailsList = filteredItems?.let {
             SurahTranslationDTO(it)
         })
 
         println("FromVieuModel list: $filteredItems")
-       println("FromVieuModel search: $search")
+        println("FromVieuModel search: $search")
 
 
     }
@@ -132,32 +131,33 @@ class SurahDetailViewModel @Inject constructor(
         language = lan
         surahItemNumber = surahNum
         println("language and sura num from addSurahITem  $language and $surahItemNumber")
-        getSurahDetail(lan,surahNum)
+        getSurahDetail(lan, surahNum)
         println("SurahDetails  ${suraDetailsList.value}")
 
     }
 
-    fun addSurahNumForPlayer(surahNum: Int){
+    fun addSurahNumForPlayer(surahNum: Int) {
         surahItemNumberForPlayer = surahNum
     }
+
     fun prepareSuraNumberForPlayer() = run {
-        var surahNumString:String?=""
-        surahNumString = if (surahItemNumberForPlayer<10){
+        var surahNumString: String? = ""
+        surahNumString = if (surahItemNumberForPlayer < 10) {
             "00$surahItemNumberForPlayer"
-        }else if (surahItemNumberForPlayer<100){
+        } else if (surahItemNumberForPlayer < 100) {
             "0$surahItemNumberForPlayer"
-        }else{
+        } else {
             "$surahItemNumberForPlayer"
         }
         surahNumString
     }
 
     fun addQariSelection(qari: String) {
-        _surahQariSelected.value  = qari
+        _surahQariSelected.value = qari
     }
 
-    fun getQariSelection():String{
-        return  surahQariSelection
+    fun getQariSelection(): String {
+        return surahQariSelection
     }
 
 
