@@ -24,13 +24,18 @@ class MainViewModel @Inject constructor (
 
     private val _selectedItem = MutableLiveData<SurahData>()
     val selectedItem :LiveData<SurahData> = _selectedItem
+
+
+    private val _retryAction = MutableLiveData<Unit>()
+    val retryAction :LiveData<Unit> get() = _retryAction
+
     init {
         getSurah()
 
     }
 
 
-    private fun getSurah() {
+      fun getSurah() {
         viewModelScope.launch {
             getSurahUseCase().collect{
                     result ->
@@ -50,6 +55,9 @@ class MainViewModel @Inject constructor (
         _selectedItem.value = null
     }
 
+    fun onRetryActionButton(){
+        _retryAction.value = Unit
+    }
 
 
     }

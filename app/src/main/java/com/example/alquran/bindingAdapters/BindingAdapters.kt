@@ -2,6 +2,7 @@ package com.example.alquran.bindingAdapters
 
 import android.opengl.Visibility
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -10,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.example.alquran.R
 import com.example.alquran.Resources
 import com.example.alquran.data.remote.dto.SurahData
 import com.example.alquran.data.remote.dto.SurahDto
@@ -36,11 +38,28 @@ fun RecyclerView.setVisibleListSuccess(resources: Resources<SurahDto>?){
 
 @BindingAdapter("setVisibleError")
 fun setVisibleError(view: TextView,resources: Resources<*>){
+
         if (resources is Resources.Error ){
                 view.visibility = View.VISIBLE
-                view.text = resources.message?:"Unexpected Error"
+                view.text =
+                    view.context.getString(R.string.unexpected_error_check_your_internet_connection)
+        }else{
+            view.visibility = View.GONE
         }
 }
+
+@BindingAdapter("setVisibleRetryBtn")
+fun setVisibleRetryBtn(view: Button,resources: Resources<*>){
+
+        if (resources is Resources.Error ){
+                view.visibility = View.VISIBLE
+
+        }else{
+            view.visibility = View.GONE
+        }
+}
+
+
 
 @BindingAdapter("setVisibleLoading")
 fun setVisibleLoading(view: View,resources: Resources<*>){

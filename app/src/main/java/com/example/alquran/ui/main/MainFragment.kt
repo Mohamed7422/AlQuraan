@@ -1,8 +1,10 @@
 package com.example.alquran.ui.main
 
+import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -15,6 +17,7 @@ import com.example.alquran.databinding.FragmentMainBinding
 
 import com.example.alquran.ui.base.BaseFragment
 import com.example.alquran.ui.surahDetail.SurahDetailsAdapter
+import com.example.alquran.util.InternetConnection
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,6 +34,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main)
 
 //            val supportActionBar = (activity as AppCompatActivity)?.supportActionBar
 //            supportActionBar?.title = "Home"
+
+            viewModel.retryAction.observe(viewLifecycleOwner){
+               if (InternetConnection.isInternetAvailable(requireContext())){
+                      viewModel.getSurah()
+               }else{
+                   Toast.makeText(requireContext(),
+                       getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+               }
+
+            }
         }
         @RequiresApi(Build.VERSION_CODES.O)
         override fun onStart() {

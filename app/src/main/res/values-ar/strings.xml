@@ -8,4 +8,7 @@
     <string name="muhammad_sideq_al_minshawe_muratl">محمد صديق المنشاوي مرتل</string>
     <string name="faris_abbad">فارس عباد مرتل</string>
     <string name="surah_ayat">أيات السوره</string>
+    <string name="retry">حاول مره أخري</string>
+    <string name="unexpected_error_check_your_internet_connection">عدم امكانيه الوصول للانترنت..حاول توصيل الانترنت من خلال الواي فاي او شبكه المحمول</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالانترنت</string>
 </resources>

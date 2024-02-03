@@ -14,10 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#BAB3A5"
-        android:padding="8dp"
-        >
-
-
+        android:padding="8dp">
 
 
         <ProgressBar
@@ -25,12 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:setVisibleLoading = "@{viewModel.navigateToSelectedProperty}"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setVisibleLoading="@{viewModel.navigateToSelectedProperty}" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -53,15 +49,41 @@
             android:id="@+id/surasErrorMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/abril_fatface"
+            tools:text="Error happened during connection"
+            android:textColor="#CC4444"
+            android:textSize="20sp"
             android:visibility="visible"
-            app:setVisibleError = "@{viewModel.navigateToSelectedProperty}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/retryBtn"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:setVisibleError="@{viewModel.navigateToSelectedProperty}" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:visibility="gone"
+            app:cornerRadius="35dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/surasErrorMsg"
+            app:setVisibleRetryBtn="@{viewModel.navigateToSelectedProperty}"
+            android:onClick="@{()->viewModel.onRetryActionButton()}"
+
+
+
             />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
