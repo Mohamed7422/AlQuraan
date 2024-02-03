@@ -45,23 +45,22 @@ import java.util.*
 @AndroidEntryPoint
 class SurahDetailsFragment :
 
-  BaseFragment<FragmentSurahDetailsBinding>(R.layout.fragment_surah_details) {
-    private lateinit var suraItem :SurahData
+    BaseFragment<FragmentSurahDetailsBinding>(R.layout.fragment_surah_details) {
+    private lateinit var suraItem: SurahData
 
-   private val english: String = "english_saheeh"
-   private val french: String = "french_montada"
-   private val menshawiQari:String = "muhammad_siddeeq_al-minshaawee"
-   private val farisAbadQari:String = "fares"
-    private var writeQariSharedPref:SharedPreferences?=null
-    private var readQariSharedPref:SharedPreferences?=null
+    private val english: String = "english_saheeh"
+    private val french: String = "french_montada"
+    private val menshawiQari: String = "muhammad_siddeeq_al-minshaawee"
+    private val farisAbadQari: String = "fares"
+    private var writeQariSharedPref: SharedPreferences? = null
+    private var readQariSharedPref: SharedPreferences? = null
 
     lateinit var suraPlayerService: SuraPlayerService
 
-    private var suraPlayer:ExoPlayer?= null
+    private var suraPlayer: ExoPlayer? = null
 
     var isBound = false
     lateinit var myConnectionService: ServiceConnection
-
 
 
     private companion object {
@@ -71,13 +70,13 @@ class SurahDetailsFragment :
     private val viewModel: SurahDetailViewModel by activityViewModels()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true) // Fragment should handle menu actions
 
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -85,12 +84,14 @@ class SurahDetailsFragment :
     ): View? {
 
 
-        writeQariSharedPref = activity?.getSharedPreferences(getString(R.string.qurisharedpref),Context.MODE_PRIVATE)
-        readQariSharedPref = activity?.getSharedPreferences(getString(R.string.qurisharedpref),Context.MODE_PRIVATE)
+        writeQariSharedPref =
+            activity?.getSharedPreferences(getString(R.string.qurisharedpref), Context.MODE_PRIVATE)
+        readQariSharedPref =
+            activity?.getSharedPreferences(getString(R.string.qurisharedpref), Context.MODE_PRIVATE)
 
 
-
-        val qariFromSharedPref = readQariSharedPref?.getString(getString(R.string.qarikey), menshawiQari)
+        val qariFromSharedPref =
+            readQariSharedPref?.getString(getString(R.string.qarikey), menshawiQari)
 
         qariFromSharedPref?.let {
             viewModel.addQariSelection(it)
@@ -98,7 +99,7 @@ class SurahDetailsFragment :
 
 
         suraItem = SurahDetailsFragmentArgs.fromBundle(requireArguments()).suraItem
-        Log.i("FrgTagTag","suraItem : ${suraItem.number}")
+        Log.i("FrgTagTag", "suraItem : ${suraItem.number}")
         viewModel.addSurahNumForPlayer(suraItem.number)
 
 
@@ -109,17 +110,17 @@ class SurahDetailsFragment :
     }
 
     private fun doBindService() {
-        val bindIntent = Intent(requireContext(),SuraPlayerService::class.java)
-        requireContext().bindService(bindIntent,myConnectionService, Context.BIND_AUTO_CREATE)
+        val bindIntent = Intent(requireContext(), SuraPlayerService::class.java)
+        requireContext().bindService(bindIntent, myConnectionService, Context.BIND_AUTO_CREATE)
     }
 
-    private fun initializeSuraPlayer(uri:String) {
+    private fun initializeSuraPlayer(uri: String) {
 
-            suraPlayer = suraPlayerService.suraPlayer
+        suraPlayer = suraPlayerService.suraPlayer
 
 
-            suraPlayerService.setMediaSource(uri)
-            binding.playerView.player =  suraPlayer
+        suraPlayerService.setMediaSource(uri)
+        binding.playerView.player = suraPlayer
 
 
 //        suraPlayer = ExoPlayer.Builder(requireContext()).build()
@@ -141,20 +142,19 @@ class SurahDetailsFragment :
 //            }
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         val surahNumberPreparedForPlayer = viewModel.prepareSuraNumberForPlayer()
 
-        viewModel.surahQariSelected.observe(viewLifecycleOwner){
-            Log.i("SurFRgTag","Sura $surahNumberPreparedForPlayer : $it")
-            val uri = "https://download.quranicaudio.com/quran/$it/$surahNumberPreparedForPlayer.mp3"
-            Log.i("SurFRgTag","Su $uri ")
+        viewModel.surahQariSelected.observe(viewLifecycleOwner) {
+            Log.i("SurFRgTag", "Sura $surahNumberPreparedForPlayer : $it")
+            val uri =
+                "https://download.quranicaudio.com/quran/$it/$surahNumberPreparedForPlayer.mp3"
+            Log.i("SurFRgTag", "Su $uri ")
 
 
 //            Log.i("SurFRgTag","Suraurl $uri ")
@@ -162,21 +162,22 @@ class SurahDetailsFragment :
 //            initializeSuraPlayer(uri)
 
             myConnectionService = object : ServiceConnection {
-            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                val playerService:SuraPlayerService.MyPlayerBoundService = service as SuraPlayerService.MyPlayerBoundService
-                suraPlayerService = playerService.getService()
+                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                    val playerService: SuraPlayerService.MyPlayerBoundService =
+                        service as SuraPlayerService.MyPlayerBoundService
+                    suraPlayerService = playerService.getService()
 
-                initializeSuraPlayer( uri)
+                    initializeSuraPlayer(uri)
 
-                isBound = true
+                    isBound = true
+
+                }
+
+                override fun onServiceDisconnected(name: ComponentName?) {
+                    isBound = false
+                }
 
             }
-
-            override fun onServiceDisconnected(name: ComponentName?) {
-                isBound = false
-            }
-
-        }
             doBindService()
 
 
@@ -221,7 +222,6 @@ class SurahDetailsFragment :
             )
 
 
-
         val languageFromSharedPref =
             readLanguageSharedPref?.getString(getString(R.string.languagekey), english)
 
@@ -245,7 +245,8 @@ class SurahDetailsFragment :
             val radioGroup: RadioGroup = btnSheetDialogView.findViewById(R.id.selection_container)
             val saveButton: View = btnSheetDialogView.findViewById(R.id.save)
 
-            val quraaRadioGroup :RadioGroup = btnSheetDialogView.findViewById(R.id.selection_qari_container)
+            val quraaRadioGroup: RadioGroup =
+                btnSheetDialogView.findViewById(R.id.selection_qari_container)
 
 
             val currentValue =
@@ -261,10 +262,11 @@ class SurahDetailsFragment :
                 }
             }
 
-            val currentQariSelection = writeQariSharedPref?.getString(getString(R.string.qarikey),menshawiQari)
+            val currentQariSelection =
+                writeQariSharedPref?.getString(getString(R.string.qarikey), menshawiQari)
 
-            if (!currentQariSelection.isNullOrEmpty()){
-                when(currentQariSelection){
+            if (!currentQariSelection.isNullOrEmpty()) {
+                when (currentQariSelection) {
                     menshawiQari -> quraaRadioGroup.check(R.id.menshawi)
                     farisAbadQari -> quraaRadioGroup.check(R.id.faris)
                 }
@@ -275,19 +277,19 @@ class SurahDetailsFragment :
                 val radioButton: RadioButton = btnSheetDialogView.findViewById(selectedRadioId)
 
                 val selectedQariId = quraaRadioGroup.checkedRadioButtonId
-                val qariBtn :RadioButton = btnSheetDialogView.findViewById(selectedQariId)
+                val qariBtn: RadioButton = btnSheetDialogView.findViewById(selectedQariId)
 
 
-                val qari = when(qariBtn.text.toString()){
-                    getString(R.string.muhammad_sideq_al_minshawe_muratl)-> menshawiQari
+                val qari = when (qariBtn.text.toString()) {
+                    getString(R.string.muhammad_sideq_al_minshawe_muratl) -> menshawiQari
                     getString(R.string.faris_abbad) -> farisAbadQari
                     else -> ""
                 }
 
-                if (qari.isNotEmpty()){
+                if (qari.isNotEmpty()) {
                     writeQariSharedPref?.edit()
-                        ?.putString(getString(R.string.qarikey),qari)?.commit()
-                   viewModel.addQariSelection(qari)
+                        ?.putString(getString(R.string.qarikey), qari)?.commit()
+                    viewModel.addQariSelection(qari)
 
                 }
 
@@ -310,7 +312,6 @@ class SurahDetailsFragment :
             bottomSheetDialog.show()
 
         }
-
 
 
         val color = ContextCompat.getColor(requireContext(), R.color.Progress_Bar_Color)
@@ -345,10 +346,10 @@ class SurahDetailsFragment :
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     override fun onStart() {
 
         super.onStart()
-
 
 
 //        binding.filterSearch.addTextChangedListener {
@@ -383,7 +384,7 @@ class SurahDetailsFragment :
     }
 
     private fun doUnbindService() {
-        if (isBound){
+        if (isBound) {
             context?.unbindService(myConnectionService)
             isBound = false
         }

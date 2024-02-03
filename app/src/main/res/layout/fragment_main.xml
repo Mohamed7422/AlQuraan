@@ -17,6 +17,25 @@
         android:padding="8dp">
 
 
+        <EditText
+            android:id="@+id/sura_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/baseline_search"
+            android:background="@drawable/oval_shape_search_main"
+            android:hint="@string/search"
+            android:textColorHint="@color/black"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:text="@={viewModel.searchQuery}"
+            app:setVisibleSearchEditText = "@{viewModel.navigateToSelectedProperty}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/surahRecyclerView"
+            android:layout_marginBottom="4dp"
+
+            />
+
+
         <ProgressBar
             android:id="@+id/surasProgressBar"
             android:layout_width="wrap_content"
@@ -32,10 +51,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/surahRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
 
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
+            app:layout_constraintTop_toBottomOf="@id/sura_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
