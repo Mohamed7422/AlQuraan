@@ -28,6 +28,7 @@
             android:maxLines="1"
             android:padding="8dp"
             android:text="@={viewModel.searchQuery}"
+            android:textColor="@color/black"
             app:setVisibleSearchEditText = "@{viewModel.navigateToSelectedProperty}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/surahRecyclerView"

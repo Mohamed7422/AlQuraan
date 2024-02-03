@@ -160,6 +160,7 @@
                         android:background="@drawable/oval_shape"
                         android:hint="@string/search"
                         android:textColorHint="@color/black"
+                        android:textColor="@color/black"
                         android:maxLines="1"
                         android:padding="8dp"
                         android:text="@={viewModel.searchQuery}" />

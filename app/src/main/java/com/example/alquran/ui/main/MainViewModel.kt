@@ -42,25 +42,29 @@ class MainViewModel @Inject constructor(
     private fun filterList(searchStr: String?) {
         val allList: List<SurahData>? = originalList.value?.data?.list
 
-        val filteredList = if (searchStr.isNullOrBlank()) {
-            allList
+        if (searchStr!= "0"){
+            val filteredList = if (searchStr.isNullOrBlank() or  searchStr.isNullOrEmpty()) {
+                allList
 
-            //return the full list
-        } else {
-            //return the filtered list
-            allList?.filter {
-                it.number.toString().equals(searchStr, ignoreCase = true)
+                //return the full list
+            } else {
+                //return the filtered list
+                allList?.filter {
+                    it.number.toString().equals(searchStr, ignoreCase = true)
+                }
+
             }
 
+            val result = if (allList == null) {
+                return
+            } else {
+                filteredList?.let { SurahDto(it) }?.let { Resources.Success<SurahDto>(it) }
+            }
+            _navigateToSelectedProperty.value = result
+            println("Filtered List ${result?.data}")
         }
 
-        val result = if (allList == null) {
-             return
-        } else {
-            filteredList?.let { SurahDto(it) }?.let { Resources.Success<SurahDto>(it) }
-        }
-        _navigateToSelectedProperty.value = result
-        println("Filtered List ${result?.data}")
+
 
     }
 
